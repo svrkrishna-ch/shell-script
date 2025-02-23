@@ -2,6 +2,6 @@
 
 echo "Please enter your fullname"
 
-read FULLNAME
+read -s FULLNAME
 
 echo "Thank you ${FULLNAME}"

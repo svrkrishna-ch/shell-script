@@ -9,7 +9,7 @@ then
 fi
 
 dnf install mysql -y
-then 
+then
     echo "Installing Mysql - FAILURE"
     exit 1
 else

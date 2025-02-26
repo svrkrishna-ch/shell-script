@@ -42,5 +42,5 @@ then
     VALIDATE $? "Installing Git"
     
 else
-    echo -e "Git is already INSTALLED"
+    echo -e "Git is already $G INSTALLED"
 fi

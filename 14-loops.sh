@@ -3,7 +3,7 @@
 for i in {0..10}
 
 do
-    $i
+    echo $i
 done
 
 # echo 1

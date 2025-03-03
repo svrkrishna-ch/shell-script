@@ -1,6 +1,5 @@
 #!/bin/bash
-
-USERID=$(id -u)
+ 
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -11,22 +10,12 @@ DEST_DIR=$2
 DAYS=${3:-14} # if user is not providing no.of days, we are taking 14 as default
 
 LOGS_FOLDER="/home/ec2-user/shellscript-logs"
-LOG_FILE=$(echo $0 | cut -d "." -f1 )
+LOG_FILE=$(echo $0 awk -F "/" '{print $NF}'| cut -d "." -f1 )
 TIMESTAMP=$(date +%y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 FILES="$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)"
 ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
-
-VALIDATE(){
-    if [ $1 -ne 0 ]
-    then 
-        echo -e "$2 ... $R FAILURE $N"
-        exit 1
-    else
-        echo -e "$2 ... $G SUCCESS $N"
-    fi
-}
-
+ 
 USAGE(){
     echo -e "$R USAGE:: $N sh 18-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS(Optional)>" 
     exit 1
@@ -64,6 +53,7 @@ then
         do
             echo "Deleting file: $filepath" &>>$LOG_FILE_NAME
             rm -rf $filepath
+            echo "Deleting file: $filepath"
         done <<< $FILES
     else
         echo -e "$R ERROR:: $N Failed to create zip file"

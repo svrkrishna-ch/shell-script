@@ -15,6 +15,7 @@ LOG_FILE=$(echo $0 | cut -d "." -f1 )
 TIMESTAMP=$(date +%y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 FILES="$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)"
+ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -55,6 +56,7 @@ echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
 if [ -n "$FILES" ]
 then
     echo "Files are: $FILES"
+    zip -@ "$ZIP_FILE"
 else
     echo -e "No files found older than $DAYS"
 fi

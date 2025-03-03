@@ -10,7 +10,7 @@ DEST_DIR=$2
 DAYS=${3:-14} # if user is not providing no.of days, we are taking 14 as default
 
 LOGS_FOLDER="/home/ec2-user/shellscript-logs"
-LOG_FILE=$(echo $0 awk -F "/" '{print $NF}'| cut -d "." -f1 )
+LOG_FILE=$(echo $0 | cut -d "." -f1 )
 TIMESTAMP=$(date +%y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 FILES="$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)"
@@ -53,7 +53,7 @@ then
         do
             echo "Deleting file: $filepath" &>>$LOG_FILE_NAME
             rm -rf $filepath
-            echo "Deleting file: $filepath"
+            echo "Deleted file: $filepath"
         done <<< $FILES
     else
         echo -e "$R ERROR:: $N Failed to create zip file"
@@ -62,3 +62,4 @@ then
 else
     echo -e "No files found older than $DAYS"
 fi
+

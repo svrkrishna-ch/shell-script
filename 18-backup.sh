@@ -50,4 +50,4 @@ then
     exit 1
 fi
 
-echo "Files are: $FILES
+echo "Files are: $FILES"

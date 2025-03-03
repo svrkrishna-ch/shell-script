@@ -50,4 +50,11 @@ then
     exit 1
 fi
 
-echo "Files are: $FILES"
+echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
+
+if [ -n "$FILES" ]
+then
+    echo "Files are: $FILES"
+else
+    echo -e "No files found older than $DAYS"
+fi

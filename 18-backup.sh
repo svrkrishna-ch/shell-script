@@ -14,6 +14,7 @@ LOGS_FOLDER="/home/ec2-user/shellscript-logs"
 LOG_FILE=$(echo $0 | cut -d "." -f1 )
 TIMESTAMP=$(date +%y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
+FILES="$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -39,10 +40,14 @@ fi
 
 if [ ! -d $SOURCE_DIR ]
 then
-    echo -e "Source Directory does not exist...Please check"
+    echo -e "$SOURCE_DIR does not exist...Please check"
+    exit 1
 fi
 
 if [ ! -d $DEST_DIR ]
 then
-    echo -e "Destination Directory does not exist...Please check"
+    echo -e "$DEST_DIR does not exist...Please check"
+    exit 1
 fi
+
+echo "Files are: $FILES
